@@ -31,6 +31,15 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss',
+    ['@nuxtjs/google-fonts',
+    {
+      families: {
+        'Exo+2': {
+          ital: [700]
+        },
+        'Space+Mono': true
+      }
+    }]
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
