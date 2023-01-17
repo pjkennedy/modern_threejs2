@@ -1,24 +1,27 @@
 <template>
-<div id="container" class="absolute text-white text-center w-full px-6 max-w-2xl" style="
-          top: 50%; width: 100%;
-          transform: translateY(-50%, -50%); left: 5%;
-          ">
+<div>
+  <canvas ref="canvas"></canvas>
+
+  <div id="container" class="absolute text-white text-center w-full px-6 max-w-2xl"
+          style="top: 50%; width: 100%;
+          transform: translateY(-50%, -50%); left: 25%;">
 
         <h1 id="patrickKennedy"
         class="font-space-mono text-sm uppercase
         tracking-wide opacity-0"
         style="transform: translateY(30px)">Patrick Kennedy</h1>
-        <p id="oneWithAn" class="font-exo text-4xl" style="transform: translateY(30px)">
+        <p id="oneWithAn" class="font-exo opacity-0 text-4xl" style="transform: translateY(30px)">
           ONE WITH AN EVERLASTING
           DESIRE FOR THE UNKNOWN & UNTOLD
         </p>
-        <a id="viewWorkBtn" href="https://chriscourses.com/"
+        <a id="viewWorkBtn" href="https://localhost/space-invaders/"
           class="border px-4 py-2 rounded-lg text-sm font-space-mono uppercase mt-8
             hover:bg-white hover:text-gray-800 inline-block
             opacity-0" style="transform:
             translateY(30px)">
             View Work</a>
-      </div>
+  </div>
+</div>
 </template>
 
 
@@ -128,18 +131,20 @@ export default {
     const raycaster = new Raycaster()
     const scene = new Scene();
     const camera = new PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000)
-    const renderer = new WebGLRenderer(
-                              )
+    const renderer = new WebGLRenderer({
+      canvas: this.$refs.canvas
+    })
 
     //console.log(scene);
     //console.log(camera);
     //console.log(renderer);
 
-    renderer.setSize(innerWidth, innerHeight)
-    renderer.setPixelRatio(devicePixelRatio)
-    document.body.appendChild(renderer.domElement)
 
-    new OrbitControls(camera, renderer.domElement)
+  renderer.setSize(innerWidth, innerHeight)
+  renderer.setPixelRatio(devicePixelRatio)
+  // #22 document.body.appendChild(renderer.domElement)
+
+  new OrbitControls(camera, renderer.domElement)
 
 
     /// removing the yellow box; next two ///
@@ -349,6 +354,7 @@ export default {
       //console.log(mouse)
     })
 
+
     gsap.to('#patrickKennedy', {
       opacity: 1,
       duration: 1.5,
@@ -359,26 +365,44 @@ export default {
     gsap.to('#oneWithAn', {
       opacity: 1,
       duration: 1.5,
-      delay: 0.3,
+      delay: 0.5,
       y: 0,
       ease: 'expo'
     })
-
 
     gsap.to('#viewWorkBtn', {
       opacity: 1,
       duration: 1.5,
-      delay: 0.6,
+      delay: 1,
       y: 0,
       ease: 'expo'
     })
 
-    let viewWork = document.querySelector('#viewWorkBtn')
+    addEventListener('resize', () => {
+      camera.aspect = innerWidth / innerHeight
+      camera.updateProjectionMatrix()
+      renderer.setSize(innerWidth,
+        innerHeight)
 
-      viewWork.addEventListener('click', (event) => {
-        event.preventDefault()
+    })
+
+
+    document.querySelector('#viewWorkBtn').
+      addEventListener('click', (evt) => {
+        evt.preventDefault()
+        console.log("Go")
+
+    //let viewWork = document.querySelector('#viewWorkBtn')
+
+    //console.log(viewWork)
+    //renderer.appendChild(viewWork)
+    //this.$refs.canvas.appendChild(viewWork)
+    //renderer.domElement.appendChild
+    //this.$refs.canvas.appendChild(viewWork)
+
+      //viewWork.addEventListener('click', (event) => {
+      //  event.preventDefault()
         //console.log('go')
-
       gsap.to("#container", {
         opacity: 0
       })
@@ -398,20 +422,14 @@ export default {
         duration: 1,
         delay: 2,
         onComplete: () => {
-          window.location = 'https://chriscourses.com/'
+          //window.location = 'https://chriscourses.com/'
+          //console.log(this.$router)
+          this.$router.push('/work')
         }
       })
 
     })
 
-    addEventListener('resize', () => {
-      camera.aspect = innerWidth / innerHeight
-      camera.updateProjectionMatrix()
-      renderer.setSize(innerWidth,
-        innerHeight)
-
-
-    })
 
 
   } // mounted()
