@@ -1,3 +1,10 @@
+# FYI: I have completed both part 1 and part 2 on a second pass with complete perfection, but I have not uploaded the git data here, 
+# as I respect the original authoris work too much. Instead, I will publish a website soon based on it, to be hosted as facepress.org 
+# that will integrate Chris Lis' great ideas to support my new website. The website should be available by late February, 2023 --
+# very soon -- as the fundamental codebase works perfectly and will be augmented slightly...and the "Intermediate Three.js with Shaders"
+# codebase will also be integrated into the website.
+
+
 # my-portfolio
 
 ## Build Setup
